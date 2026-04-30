@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mr-review-agent"
+version = "0.1.0"
+description = "A local-first merge request review assistant."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "langchain>=0.3.0",
+  "langchain-openai>=0.2.0",
+  "PyYAML>=6.0",
+  "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6.0",
+]
+
+[project.scripts]
+mr-review = "mr_review_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

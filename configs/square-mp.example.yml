@@ -1,0 +1,45 @@
+project:
+  name: square-mp
+
+checks:
+  - name: eslint
+    command: pnpm exec eslint {files}
+    required: true
+    changed_files:
+      enabled: true
+      include_extensions:
+        - .js
+        - .jsx
+        - .ts
+        - .tsx
+        - .vue
+
+  - name: type-check
+    command: pnpm type-check
+    required: true
+    enabled: false
+
+  # stylelint先隐藏
+  - name: stylelint
+    command: pnpm exec stylelint {files}
+    required: true
+    changed_files:
+      enabled: true
+      include_extensions:
+        - .vue
+        - .scss
+        - .css
+        - .sass
+        - .less
+
+  - name: api-consistency
+    command: pnpm check-api
+    required: true
+
+report:
+  output_dir: reports
+
+llm:
+  enabled: false
+  provider: openai
+  model: gpt-4o-mini
